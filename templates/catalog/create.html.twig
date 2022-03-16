@@ -7,12 +7,40 @@
 {% block body %}
 <h1>{{ title }}<h1>
 
-{{ form_start(form) }}
-{{ form_widget(form) }}
+{{ form_start(form, {'attr': {'novalidate': "novalidate"}}) }}
+
+{#  CSRF Token #}
+{{ form_widget(form._csrf_product_token) }}
+
+{# Nom du produit #}
+<div class="form-group">
+  {{ form_label(form.title) }}
+  {{ form_widget(form.title) }}
+  {{ form_errors(form.title) }}
+  {{ form_help(form.title) }}
+</div>
+
+{# prix du produit #}
+<div class="form-group">
+  {{ form_label(form.price) }}
+  {{ form_widget(form.price) }}
+  {{ form_errors(form.price) }}
+  {{ form_help(form.price) }}
+</div>
+
+{# description du produit #}
+<div class="form-group">
+  {{ form_label(form.description) }}
+  {{ form_widget(form.description) }}
+  {{ form_errors(form.description) }}
+  {{ form_help(form.description) }}
+</div>
+
+{# {{ form_widget(form) }} #}
 
 <button type="submit">Ajouter le produit</button> 
 
-{{ form_end(form) }}
+{{ form_end(form, {'render_rest': false}) }}
 
 
 {# {{ dump(form) }} #}

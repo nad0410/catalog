@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Product;
-use App\Form\ProductType;
+use App\Entity\Category;
+use App\Form\CategoryType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,36 +11,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+
 /**
- * @Route("/product", name="app_catalog_")
+ * @Route("/category", name="app_category_")
  * 
- * site.com/products            => Affiche la liste des produits
- * site.com/product             => Creer un produit
- * site.com/product/{id}        => Afficher le detail d'un produit
- * site.com/product/{id}/edit   => Modifier un produit
- * site.com/product/{id}/delete => Supprime un produit
  */
-class CatalogController extends AbstractController
+class CategoryController extends AbstractController
 {
     /**
-     * Affiche la liste des produits
-     * 
-     * url ex: /products
-     * name: app_catalog_index
-     * 
      * @Route("s", name="index")
      */
     public function index(): Response
     {
-        return $this->render('catalog/index.html.twig', [
+        return $this->render('category/index.html.twig', [
         ]);
     }
 
     /**
-     * Ajouter un produit dans la bdd
+     * Ajouter une categorie dans la bdd
      * 
-     * url ex: /product
-     * name: app_catalog_create
+     * url ex: /category
+     * name: app_category_create
      * 
      * @Route("", name="create")
      */
@@ -51,12 +42,11 @@ class CatalogController extends AbstractController
         // Create Form
         // --
 
-        // Initialiser le produit
-        $product = new Product;
+        // Initialiser la categorie
+        $category = new Category;
 
-        
         // Construction du formulaire
-        $form = $this->createForm(ProductType::class, $product);
+        $form = $this->createForm(CategoryType::class, $category);
 
         // Handle the request
         $form->handleRequest($request);
@@ -65,25 +55,25 @@ class CatalogController extends AbstractController
         if ( $form->isSubmitted() ) 
         {
             // recuperer les donnees en tableau
-            $submittedToken = $request->request->get('product')['_csrf_product_token'];            
-            if (!$this->isCsrfTokenValid('_csrf_product_token_id', $submittedToken))
+            $submittedToken = $request->request->get('category')['_csrf_category_token'];            
+            if (!$this->isCsrfTokenValid('_csrf_category_token_id', $submittedToken))
             {
                 dd("Erreur de Token");
             }
             
             // Handle form errors
-            $errors = $validator->validate( $product );
+            $errors = $validator->validate( $category );
 
             // si le form est valid
             if ( $form->isValid() )
             {
                 // enregistrement en bdd
                 $en = $doctrine->getManager();
-                $en->persist( $product );
+                $en->persist( $category );
                 $en->flush();
 
                 // rediriger utilisateur
-                return $this->redirectToRoute('app_catalog_index');
+                return $this->redirectToRoute('app_category_index');
             }
         }
 
@@ -92,16 +82,16 @@ class CatalogController extends AbstractController
 
         // Response HTTP
         // --
-        return $this->render('catalog/create.html.twig', [
+        return $this->render('category/create.html.twig', [
             'form' => $form
         ]);
     }
 
     /**
-     * Afficher le detail d'un produit
+     * Afficher le detail d'une categorie'
      * 
-     * url ex: /product
-     * name: app_catalog_read
+     * url ex: /category
+     * name: app_category_read
      * 
      * @Route("/{id}", name="read")
      */
@@ -111,10 +101,10 @@ class CatalogController extends AbstractController
     }
 
     /**
-     * Modifier la fiche d'un produit
+     * Modifier la fiche d'une categorie
      * 
-     * url ex: /product
-     * name: app_catalog_update
+     * url ex: /category
+     * name: app_category_update
      * 
      * @Route("/{id}/edit", name="update")
      */
@@ -124,10 +114,10 @@ class CatalogController extends AbstractController
     }
 
     /**
-     * Supprimer la fiche d'un produit
+     * Supprimer la fiche d'une categorie
      * 
-     * url ex: /product
-     * name: app_catalog_delete
+     * url ex: /category
+     * name: app_category_delete
      * 
      * @Route("/{id}/delete", name="delete")
      */
@@ -135,4 +125,5 @@ class CatalogController extends AbstractController
     {
 
     }
+
 }

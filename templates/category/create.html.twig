@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% set name = "Ajouter une categorie" %}
+
+
+{% block title %}{{ name }}- {{ parent() }}{% endblock %}
+
+{% block body %}
+<h1>{{ name }}<h1>
+
+{{ form_start(form, {'attr': {'novalidate': "novalidate"}}) }}
+
+{#  CSRF Token #}
+{{ form_widget(form._csrf_category_token) }}
+
+{# Nom de la categorie #}
+<div class="form-group">
+  {{ form_label(form.name) }}
+  {{ form_widget(form.name) }}
+  {{ form_errors(form.name) }}
+  {{ form_help(form.name) }}
+</div>
+
+{# prix de la categorie #}
+<div class="form-group">
+  {{ form_label(form.color) }}
+  {{ form_widget(form.color) }}
+  {{ form_errors(form.color) }}
+  {{ form_help(form.color) }}
+</div>
+
+
+{# {{ form_widget(form) }} #}
+
+<button type="submit">Ajouter la categorie</button> 
+
+{{ form_end(form, {'render_rest': false}) }}
+
+{% endblock %}

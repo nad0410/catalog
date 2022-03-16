@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Categories - {{ parent() }}{% endblock %}
+
+{% block body %}
+<h1>Categories</h1>
+
+<a href="{{ url('app_category_create') }}">Ajouter une categorie</a>
+{% endblock %}
