@@ -42,6 +42,16 @@ class Product
         return $this->title;
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -49,21 +59,11 @@ class Product
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
     public function setDescription(?string $description): self
     {
         $this->description = $description;
 
         return $this;
-    }
-
-    public function getPrice(): ?string
-    {
-        return $this->price;
     }
 
     public function setPrice(string $price): self

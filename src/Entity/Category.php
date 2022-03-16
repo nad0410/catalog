@@ -18,10 +18,15 @@ class Category
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=80, nullable=true)
+     * @ORM\Column(type="string", length=80, nullable=false)
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+    
     /**
      * @ORM\Column(type="string", length=7, options={"fixed": true})
      */
@@ -52,6 +57,18 @@ class Category
     public function setColor(?string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

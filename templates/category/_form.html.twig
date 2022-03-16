@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+
+    {# Name #}
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name) }}
+        {{ form_errors(form.name) }}
+        {{ form_help(form.name) }}
+    </div>
+
+    {# Description #}
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+        {{ form_help(form.description) }}
+    </div>
+
+    {# Color #}
+    <div class="form-group">
+        {{ form_label(form.color) }}
+        {{ form_widget(form.color) }}
+        {{ form_errors(form.color) }}
+        {{ form_help(form.color) }}
+    </div>
+
+    <button type="submit">{{ btn_label | default("Ajouter une catégorie") }}</button>
+    
+    {{ form_end(form) }}

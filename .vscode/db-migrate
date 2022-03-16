@@ -1,0 +1,4 @@
+#!/bin/bash 
+
+php bin/console make:migration --no-interaction >> /dev/null;
+php bin/console doctrine:migrations:migrate --no-interaction >> /dev/null;
