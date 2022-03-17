@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% set title = "Info de la categorie" %}
+
+{% block title title %}
+{# {% block title "Info de la categorie" %} #}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+
+    <dl>
+        <dt>ID</dt>
+        <dd>{{ product.id }}</dd>
+
+        <dt>Title</dt>
+        <dd>{{ product.title }}</dd>
+
+        <dt>Description</dt>
+        <dd>{{ product.description }}</dd>
+
+        <dt>Prix</dt>
+        <dd>
+            {{ product.price }}
+            <span style="background-color: {{product.price}}; product:  {{product.price}};">{{ product.price}}</span>
+        </dd>
+
+        <dt>Action</dt>
+        <dd>
+            <a href="{{ url('app_product_update', {id: product.id}) }}">Editer</a>
+            <a href="{{ url('app_product_delete', {id: product.id}) }}">Supprimer</a>
+        </dd>
+    </dl>
+
+    {{ dump(product) }}
+
+{% endblock %}
