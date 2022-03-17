@@ -1,9 +1,9 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Supprimer une catégorie</h1>
+    <h1>Supprimer un produit</h1>
 
-    <p>Confirmez vous la suppression de la catégorie <strong>{{ product.title }}</strong> (id: {{ product.id }}) ?</p>
+    <p>Confirmez vous la suppression du produit <strong>{{ product.title }}</strong> (id: {{ product.id }}) ?</p>
 
 
     <form action="{{ app.request.uri }}" method="post">

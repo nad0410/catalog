@@ -1,12 +1,12 @@
 {% extends "base.html.twig" %}
 
 {# Definition de la variable "title" #}
-{% set title = "Editer une catégorie" %}
+{% set title = "Editer un produit" %}
 
 {% block title %}{{ title }} - {{ parent() }}{% endblock %}
 
 {% block body %}
     <h1>{{ title }}</h1>
 
-    {% include "product/_form.html.twig" with {btn_label: "Modifier la catégorie"} %}
+    {% include "product/_form.html.twig" with {btn_label: "Modifier le produit"} %}
 {% endblock %}

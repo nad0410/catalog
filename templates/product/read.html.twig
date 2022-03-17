@@ -1,8 +1,8 @@
 {% extends "base.html.twig" %}
-{% set title = "Info de la categorie" %}
+{% set title = "Info du produit" %}
 
 {% block title title %}
-{# {% block title "Info de la categorie" %} #}
+{# {% block title "Info du produit" %} #}
 
 {% block body %}
     <h1>{{ title }}</h1>
@@ -20,7 +20,7 @@
         <dt>Prix</dt>
         <dd>
             {{ product.price }}
-            <span style="background-color: {{product.price}}; product:  {{product.price}};">{{ product.price}}</span>
+            <span style="background-color: {{product.price}}; product:  {{product.price}};"></span>
         </dd>
 
         <dt>Action</dt>

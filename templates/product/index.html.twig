@@ -8,4 +8,31 @@
 
 <a href="{{ url('app_product_create') }}">Ajouter un produit</a>
 
+<hr>
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{ message | raw}}
+</div>
+{% endfor %} 
+
+<hr>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for product in products %}  
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.title }}</td>
+            <td><a href="{{ url('app_product_read', {id: product.id}) }}">Voir le produit</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

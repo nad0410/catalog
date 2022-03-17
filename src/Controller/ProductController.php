@@ -189,7 +189,7 @@ class ProductController extends AbstractController
         if ($request->getMethod() == 'DELETE')
         {
             // Générer le message de confirmation d'execution de la suppression
-            $message = "La categorie <strong>". $product->getTitle() ."</strong> à été supprimée";
+            $message = "Le produit <strong>". $product->getTitle() ."</strong> à été supprimé";
 
             // Suppression de la BDD
             $em = $doctrine->getManager();
