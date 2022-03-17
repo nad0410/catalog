@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Surrpimer une catégorie</h1>
+
+    <p>Confirmez vous la suppression de la catégorie <strong>{{ category.name }}</strong> (id: {{ category.id }}) ?</p>
+
+
+    <form action="{{ app.request.uri }}" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+
+        <a href="{{ url('app_category_read', {id: category.id}) }}" class="btn btn-primary">Non</a>
+        <button type="submit" class="btn btn-danger">Oui</button>
+    </form>
+
+{% endblock %}
+
+{% block title %}
+    confirmation de suppression - {{ parent() }}
+{% endblock title %}
