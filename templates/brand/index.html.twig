@@ -5,11 +5,11 @@
 {% block body %}
     <h1>index des marques</h1>
 
-    <table class="table">
+    <table class="table colored_th">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
+                <th>Name</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -30,9 +30,5 @@
         {% endfor %}
         </tbody>
     </table>
-
     <a href="{{ path('app_brand_new') }}">Create new</a>
-
-
-
 {% endblock %}

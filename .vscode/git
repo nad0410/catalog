@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash
 
 echo "Votre message de commit :"
 read msg 

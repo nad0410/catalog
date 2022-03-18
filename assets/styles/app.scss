@@ -1,0 +1,41 @@
+$title_bg_color: green;
+$title_color: white;
+
+$body_padding: 30px;
+$body_margin: 10px;
+
+body {
+    padding: $body_padding;
+    margin: $body_margin;
+}
+
+h1 {
+
+    &:hover {
+        background-color: lighten($title_bg_color, 5%);
+    }
+
+    background-color: $title_bg_color;
+    color: $title_color;
+    padding: 2.5 * $body_padding + $body_margin;
+
+    &::after {
+        content: "after ;)";
+        border: 10px solid lighten($title_bg_color, 30%);
+    }
+}
+
+
+
+
+// h1:hover {
+//     background-color: lighten($title_bg_color, 5%);
+// }
+
+.colored_th {
+
+    
+    th {
+        background-color: lighten($title_bg_color, 10%);
+    }
+}

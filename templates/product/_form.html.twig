@@ -1,4 +1,8 @@
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'novalidate': "novalidate"}}) }}
+
+
+{# CSRF Token #}
+{{ form_widget(form._csrf_product_token) }}
 
     {# Title #}
     <div class="form-group">
@@ -24,6 +28,22 @@
         {{ form_help(form.price) }}
     </div>
 
-    <button type="submit">{{ btn_label | default("Ajouter une catégorie") }}</button>
+    {# Brand #}
+    <div class="form-group">
+        {{ form_label(form.brand) }}
+        {{ form_widget(form.brand) }}
+        {{ form_errors(form.brand) }}
+        {{ form_help(form.brand) }}
+    </div>
+
+    {# Categories #}
+    {# <div class="form-group">
+        {{ form_label(form.categories) }}
+        {{ form_widget(form.categories) }}
+        {{ form_errors(form.categories) }}
+        {{ form_help(form.categories) }}
+    </div> #}
+
+    <button type="submit">{{ btn_label | default("Ajouter un produit") }}</button>
     
-    {{ form_end(form) }}
+    {{ form_end(form, {'render_rest': false}) }}

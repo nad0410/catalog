@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Brand;
+use App\Entity\Category;
 use App\Entity\Product;
-
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,11 +37,11 @@ class ProductType extends AbstractType
                 // modifier attribut du champs
                 'attr' => [
                     'class' => "form-control",
-                    'placeholder' => "Saisir le prix du produit",
+                    'placeholder' => "Saisir le nom du produit",
                 ],
 
                 // aide sur le champs
-                'help' => "Merci de saisir le prix du produit dans le champs",
+                'help' => "Merci de saisir le nom du produit dans le champs",
                 'help_attr' => [
                     'class' => "form-text text-muted",
                 ],
@@ -46,11 +49,11 @@ class ProductType extends AbstractType
                 // contraintes du formulaire
                 'constraints' => [
                     new NotBlank([
-                        'message' => "le prix du produit est obligatoire",                 
+                        'message' => "le nom du produit est obligatoire",                 
                     ]),
                     new Length([
                         'max' => 120,
-                        'maxMessage' => "le prix du produit est limité a {{ limit }} caracteres",
+                        'maxMessage' => "le nom du produit est limité a {{ limit }} caracteres",
                     ]),
                ],
             ])
@@ -118,12 +121,35 @@ class ProductType extends AbstractType
                 'currency' => "USD",
                 'html5' => true,
                 'constraints' => [
+                    new NotBlank([
+                        'message' => "Le prix du produit est obligatoire",
+                    ]),
                     new Length([
                         'max' => 5,
                         'maxMessage' => "le prix est limité a {{ limit }}  5 caractères maximum",                 
                     ]),
                 ]
             ])
+            // Brand
+            ->add('brand', EntityType::class,[
+                'class' => Brand::class,
+                // 'choice_label' => 'name', 
+                
+                'choice_label' => function ($brand){
+                    return $brand->getId() ." - ". $brand->getName();
+                }
+            ])
+            // // Categories
+            // ->add('categories', EntityType::class,[
+            //     'class'=> Category::class,
+            //     'choice_label' => "name",
+            //     'multiple' => true,
+              
+            // ])
+            // Categories
+            // ->add('categories', CollectionType::class,[
+                
+            // ])
 
             // ajout du form Pizza
             // ->add('superpizza', PizzaType::class,[

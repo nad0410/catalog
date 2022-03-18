@@ -34,6 +34,7 @@ class ProductController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findAll();
+
         return $this->render('product/index.html.twig', [
             'products' => $products
         ]);
@@ -49,6 +50,8 @@ class ProductController extends AbstractController
      */
     public function create(ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
     {
+        $errors = [];
+
         // Create Form
         // --
         // Initialiser le produit
@@ -66,15 +69,15 @@ class ProductController extends AbstractController
         {
            
             // recuperer les donnees en tableau
-            $csrf_token = $request->request->get( $form->getName() )['_csrf_product_token']; 
+            $submittedToken = $request->request->get('product')['_csrf_product_token']; 
 
-            if (! $this->isCsrfTokenValid('_csrf_product_token_id', $csrf_token))
+            if (! $this->isCsrfTokenValid('_csrf_product_token_id', $submittedToken))
             {
-                throw new \Exception("Erreur de token");
+                dd("Erreur de token");
             }
             
             // Handle form errors
-            $validator->validate( $product );
+            $errors = $validator->validate( $product );
 
             // si le form est valid
             if ( $form->isValid() )
@@ -85,9 +88,8 @@ class ProductController extends AbstractController
                 $en->flush();
 
                 // rediriger utilisateur
-                return $this->redirectToRoute('app_product_read',[
-                    'id' => $product->getId()
-                ]);
+                return $this->redirectToRoute('app_product_index');
+                
             }
         }
 
@@ -125,7 +127,9 @@ class ProductController extends AbstractController
      * @Route("/{id}/edit", name="update", methods={"HEAD", "GET", "POST"})
      */
     public function update(Product $product, ManagerRegistry $doctrine, Request $request, ValidatorInterface $validator): Response
-    {   // Construction du formulaire
+    {   
+        $errors = [];
+        // Construction du formulaire
         $form = $this->createForm(ProductType::class, $product);
 
         // Récupération de la requete HTTP
@@ -136,16 +140,16 @@ class ProductController extends AbstractController
         {
          
             // Récupération du CSRF Token
-            $csrf_token = $request->request->get( $form->getName() )['_csrf_product_token'];
+            $submittedToken = $request->request->get('product')['_csrf_product_token'];
 
             // Vérifier l'intégrité du formulaire (CSRF Token)
-            if ( ! $this->isCsrfTokenValid('_csrf_product_token_id', $csrf_token) )
+            if ( ! $this->isCsrfTokenValid('_csrf_product_token_id', $submittedToken) )
             {
-                throw new \Exception("Erreur de token");
+                dd("Erreur de token");
             }
             
             // Validation du formulaire
-            $validator->validate( $product );
+            $errors = $validator->validate( $product );
 
             if ($form->isValid())
             {
@@ -170,7 +174,8 @@ class ProductController extends AbstractController
 
         // Transmission du formulaire à la vue
         return $this->render('product/update.html.twig', [
-            'form' => $form
+            'form' => $form,
+            'product' => $product,
         ]);
     }
 

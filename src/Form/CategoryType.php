@@ -35,7 +35,6 @@ class CategoryType extends AbstractType
                 // modifier attribut du champs
                 'attr' => [
                     'class' => "form-control",
-                    'placeholder' => "Saisir le nom d'une categorie",
                 ],
 
                 // aide sur le champs
@@ -71,7 +70,6 @@ class CategoryType extends AbstractType
                 // modifier attribut du champs
                 'attr' => [
                     'class' => "form-control",
-                    'placeholder' => "Saisir la description de la categorie",
                 ],
 
                 // aide sur le champs
@@ -100,7 +98,6 @@ class CategoryType extends AbstractType
                 // modifier attribut du champs
                 'attr' => [
                 'class' => "form-control",
-                'placeholder' => "Saisir la couleur de la categorie",
                 ],
 
                 // aide sur le champs
