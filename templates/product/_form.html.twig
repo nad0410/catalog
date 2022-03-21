@@ -1,49 +1,78 @@
 {{ form_start(form, {'attr': {'novalidate': "novalidate"}}) }}
 
-
 {# CSRF Token #}
 {{ form_widget(form._csrf_product_token) }}
 
-    {# Title #}
-    <div class="form-group">
-        {{ form_label(form.title) }}
-        {{ form_widget(form.title) }}
-        {{ form_errors(form.title) }}
-        {{ form_help(form.title) }}
-    </div>
+{# Nom du produit #}
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title) }}
+    {{ form_errors(form.title) }}
+    {{ form_help(form.title) }}
+</div>
 
-    {# Description #}
-    <div class="form-group">
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description) }}
-        {{ form_errors(form.description) }}
-        {{ form_help(form.description) }}
-    </div>
+{# Prix du produit #}
+<div class="form-group">
+    {{ form_label(form.price) }}
+    {{ form_widget(form.price) }}
+    {{ form_errors(form.price) }}
+    {{ form_help(form.price) }}
+</div>
 
-    {# Price #}
-    <div class="form-group">
-        {{ form_label(form.price) }}
-        {{ form_widget(form.price) }}
-        {{ form_errors(form.price) }}
-        {{ form_help(form.price) }}
-    </div>
+{# description du produit #}
+<div class="form-group">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description) }}
+    {{ form_errors(form.description) }}
+    {{ form_help(form.description) }}
+</div>
 
-    {# Brand #}
-    <div class="form-group">
-        {{ form_label(form.brand) }}
-        {{ form_widget(form.brand) }}
-        {{ form_errors(form.brand) }}
-        {{ form_help(form.brand) }}
-    </div>
+{# Marque du produit #}
+<div class="form-group">
+    {{ form_label(form.brand) }}
+    {{ form_widget(form.brand) }}
+    {{ form_errors(form.brand) }}
+    {{ form_help(form.brand) }}
+</div>
 
-    {# Categories #}
-    {# <div class="form-group">
-        {{ form_label(form.categories) }}
-        {{ form_widget(form.categories) }}
-        {{ form_errors(form.categories) }}
-        {{ form_help(form.categories) }}
-    </div> #}
+<hr>
+<hr>
+<hr>
+<hr>
 
-    <button type="submit">{{ btn_label | default("Ajouter un produit") }}</button>
-    
-    {{ form_end(form, {'render_rest': false}) }}
+{# Categories du produit #}
+<div data-controller="collection"
+    data-item-counter="{{ form.categories | length }}"
+    data-template-id="category"
+    data-init-items="10"
+    data-required-items="2"
+    >
+
+    {# Affiche les catégories #}
+
+
+    {# Bouton "ajouter une catégorie" #}
+    <button type="button" class="btn btn-success btn-sm" data-action="click->collection#add">+ ajouter une catégorie</button>
+
+    {# Template HTML du champ catégorie #}
+    <template id="category">
+        <div>
+            {{ form_widget(form.categories.vars.prototype) }}
+            <button type="button" 
+                class="btn btn-danger btn-sm" 
+                data-target="__name__" {# data-target permet de cible le noeud "widget" à supprimer #}
+                data-action="click->collection#remove"
+            > &times; </button>
+        </div>
+    </template>
+</div>
+
+<hr>
+<hr>
+<hr>
+<hr>
+
+<button type="submit">{{ btn_label | default("Ajouter un produit") }}</button>
+
+
+{{ form_end(form, {'render_rest': true}) }}

@@ -139,17 +139,26 @@ class ProductType extends AbstractType
                     return $brand->getId() ." - ". $brand->getName();
                 }
             ])
-            // // Categories
+            // Categories
             // ->add('categories', EntityType::class,[
             //     'class'=> Category::class,
             //     'choice_label' => "name",
             //     'multiple' => true,
               
-            // ])
+            // 
+            
+            
             // Categories
-            // ->add('categories', CollectionType::class,[
-                
-            // ])
+            ->add('categories', CollectionType::class,[
+                'entry_type' => EntityType::class,
+                'entry_options' => [
+                    'class' => Category::class,
+                    'choice_label' => "name",
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+            ])
 
             // ajout du form Pizza
             // ->add('superpizza', PizzaType::class,[
