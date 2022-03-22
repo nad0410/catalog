@@ -44,12 +44,22 @@
 <div data-controller="collection"
     data-item-counter="{{ form.categories | length }}"
     data-template-id="category"
-    data-init-items="10"
+    data-init-items="1"
     data-required-items="2"
     >
 
     {# Affiche les catégories #}
-
+    {% for key, field in form.categories %}
+    <div data-field-serial="{{ loop.index0 }}">
+        
+        {{ form_widget(field) }}
+        <button type="button"
+            class="btn btn-danger btn-sm"
+            data-target="{{ loop.index0 }}"
+            data-action="click->collection#remove"
+        > &times; </button>
+    </div>
+    {% endfor %}
 
     {# Bouton "ajouter une catégorie" #}
     <button type="button" class="btn btn-success btn-sm" data-action="click->collection#add">+ ajouter une catégorie</button>

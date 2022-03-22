@@ -11,6 +11,13 @@
     <p>Marque : {{ product.brand.name }}</p>
 
     <hr>
+    <p>Categories : 
+        {% for category in product.categories %}
+            <div>{{ category.name }}</div>
+        {% endfor %}
+    </p>
+
+    <hr>
 
     <a href="{{ url('app_product_update', {id: product.id}) }}">Modifier</a> - 
     <a href="{{ url('app_product_delete', {id: product.id}) }}">Supprimer</a>
