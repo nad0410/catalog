@@ -104,8 +104,8 @@ class Product
 
     public function addCategory(Category $category): self
     {
-        if (!$this->category->contains($category)) {
-            $this->category[] = $category;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
         }
 
         return $this;

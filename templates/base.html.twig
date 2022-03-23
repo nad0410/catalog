@@ -13,31 +13,54 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body data-controller="hello">
+    <body>
+
         <header>
             <nav>
-                <a href="{{ url('app_homepage') }}">Accueil</a>
-                <a href="{{ url('app_brand_index') }}">Nos Marques</a>
-                <a href="{{ url('app_product_index') }}">Nos produits</a>
-                <a href="{{ url('app_category_index') }}">Nos categories</a>
-            </nav>        
-        </header>
-        
+                <a href="{{ url('app_homepage') }}">Accueil</a> - 
+                <a href="{{ url('app_product_index') }}">Nos produits</a> - 
+                <a href="{{ url('app_category_index') }}">Catégories</a> -
+                <a href="{{ url('app_brand_index') }}">Les marques</a> -
 
-    {% for message in app.flashes('success') %}
-    <div class="alert alert-success">
-        {{ message | raw}}
-    </div>
-    {% endfor %} 
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {# IS_AUTHENTICATED_REMEMBERED #}
+                    {# IS_AUTHENTICATED_FULLY #}
+                    {# IS_AUTHENTICATED_ANONYMOUSLY #}
+                    <a href="{{ url('app_profile') }}">{{ app.user.screenname }}</a> -
+                    <a href="{{ url('app_logout') }}">Deconnexion</a>
+                {% else %}
+                    <a href="{{ url('app_register') }}">Inscription</a> -
+                    <a href="{{ url('app_login') }}">Connexion</a>
+                {% endif %}
+
+            </nav>
+        </header>
+
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message | raw }}
+        </div>
+        {% endfor %}
 
         <hr>
-        
+
+
         <div class="main-content">
             {% block body %}{% endblock %}
         </div>
 
+        <hr>
+
         <footer>
-            &copy; 2022 - SuperCatalog 2000
+            {# {{ copyright() }} <br> #}
+            {# &copy; 2022 - SuperCatalog 2000  OK #}
+
+            {{ copyright(2009) }} <br>
+            {# &copy; 2009-2022 - SuperCatalog 2000  OK #}
+
+            {# {{ copyright(2023) }} #}
+            {# &copy; 2022 - SuperCatalog 2000  PAS OK #}
         </footer>
+
     </body>
 </html>
